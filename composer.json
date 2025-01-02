@@ -1,0 +1,16 @@
+{
+    "name": "youcode/online-store-system",
+    "autoload": {
+        "psr-4": {
+           "models\\": "models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Labballi Maroua",
+            "email": "labballimaroua@gmail.com"
+        }
+    ],
+    "require": {
+    }
+}
