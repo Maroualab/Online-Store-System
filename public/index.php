@@ -1,45 +1,40 @@
 <?php
-
-require_once realpath(path: __DIR__ . '/../') .'/views/layouts/header.php' ;
-
-
-// require realpath(path: __DIR__ . '/../') .'/vendor/autoload.php';
-
-// require __DIR__ . '/../vendor/autoload.php';
-
-// use models\User;
-
-// $user=new User('aymane','tetete','123'); 
-
-// echo $user->getName();
+require_once '../views/layouts/header.php';
 ?>
 
+<div class="bg-gradient-to-r from-indigo-900 to-purple-900 font-[sans-serif]">
+  <div class="relative overflow-hidden">
+    <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8">
+      <div class="relative z-10 text-center lg:text-left">
+        <h1 class="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl lg:text-7xl">
+          Welcome to
+          <br class="xl:hidden" />
+          <span class="text-indigo-400">Premium Delights</span>
+        </h1>
+        <p class="max-w-md mx-auto text-lg text-gray-300 sm:text-xl mt-4 md:mt-6 md:max-w-3xl">
+          Elevate your culinary experience with our exclusive premium services. Indulge in exquisite flavors and extraordinary moments.
+        </p>
 
-<div class="font-[sans-serif] bg-gray-50 px-4 py-12">
-      <div class="text-center max-w-2xl max-md:max-w-md mx-auto">
-        <div>
-          <p class="text-sm font-bold text-blue-600 mb-4"><span class="rotate-90 inline-block mr-2">|</span> ALL IN ONE MEETING SCHEDULER</p>
-          <h2 class="text-gray-800 md:text-5xl text-3xl font-extrabold mb-4 md:!leading-[55px]">Schedule meetings effortlessly</h2>
-          <p class="mt-6 text-base text-gray-500 leading-relaxed">Embark on a gastronomic journey with our curated dishes, delivered promptly to your doorstep. Elevate your dining experience today.</p>
-
-          <div class="bg-white mt-12 flex px-1 py-1.5 rounded-full shadow-md border overflow-hidden">
-            <input type='email' placeholder='Search Something...' class="w-full text-gray-800 outline-none pl-4 text-sm" />
-            <button type='button'
-              class="bg-blue-600 hover:bg-blue-700 px-5 py-2.5 transition-all text-white tracking-wide text-sm rounded-full">Search</button>
+        <div class="mt-12 flex max-sm:flex-col sm:justify-center lg:justify-start gap-4">
+          <div class="rounded-md shadow">
+          <a href="/online-store-system/views/pages/register.php"><button class="w-full flex items-center justify-center px-8 py-3 text-base tracking-wide rounded-md text-indigo-600 bg-white hover:text-indigo-500 hover:bg-indigo-100 transition duration-150 ease-in-out" id="signUp">
+              Sign Up
+            </button></a>
           </div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 items-center mt-6">
-          <img src="https://readymadeui.com/google-logo.svg" class="w-28 mx-auto" alt="google-logo" />
-          <img src="https://readymadeui.com/facebook-logo.svg" class="w-28 mx-auto" alt="facebook-logo" />
-          <img src="https://readymadeui.com/linkedin-logo.svg" class="w-28 mx-auto" alt="linkedin-logo" />
-          <img src="https://readymadeui.com/pinterest-logo.svg" class="w-28 mx-auto" alt="pinterest-logo" />
+          <div>
+            <a href="/online-store-system/views/pages/login.php"><button class="w-full flex items-center justify-center px-8 py-3 text-base tracking-wide rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition duration-150 ease-in-out" id="logIn">
+              Log In
+            </button></a>
+          </div>
         </div>
       </div>
     </div>
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://readymadeui.com/hotel-img.webp" alt="Delicious Food" />
+    </div>
+  </div>
+</div>
 
 
-<?php 
-require_once realpath(path: __DIR__ . '/../') .'/views/layouts/footer.php' ;
 
-?>
+<!-- <script>
