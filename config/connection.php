@@ -1,21 +1,17 @@
 <?php
+$host = 'localhost'; // Database host
+$dbname = 'ecommercedashboard'; // Database name
+$username = 'root'; // Database username
+$password = ''; // Database password (leave empty for local server)
 
-class Database
-{
-    private static $host = "localhost";
-    private static $db_name = "ecommercedashboard";
-    private static $username = "root";
-    private static $password = "";
-    private static $conn;
-
-    public static function getConnection()
-    {
-        if(self::$conn){
-            return self::$conn;
-        }
-        else {
-            self::$conn = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$db_name, self::$username, self::$password);
-            return self::$conn;
-        }
-    }
+try {
+    // Establish a PDO connection
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    // Handle connection error
+    die("Connection failed: " . $e->getMessage());
 }
+?>
+
+

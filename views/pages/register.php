@@ -44,7 +44,7 @@ require_once '../layouts/header.php';
           Create an account
         </button>
       </div>
-      <p class="text-gray-800 text-sm mt-6 text-center">Already have an account? <a href="register.php" class="text-blue-600 font-semibold hover:underline ml-1">Login here</a></p>
+      <p class="text-gray-800 text-sm mt-6 text-center">Already have an account? <a href="login.php" class="text-blue-600 font-semibold hover:underline ml-1">Login here</a></p>
     </form>
   </div>
 </div>
