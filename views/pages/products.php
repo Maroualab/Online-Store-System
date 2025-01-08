@@ -1,7 +1,10 @@
 <?php
 
 require_once '../layouts/header.php';
+include '../../controllers/showProduct.php';
 
+global $products;
+// print_r($products);
 
 ?>
 
@@ -360,6 +363,7 @@ require_once '../layouts/header.php';
       </button>
       <button>test</button>
 
+
       <section class="main-content w-full overflow-auto p-6">
         <div class="overflow-x-auto">
           <table class="min-w-full bg-white">
@@ -369,16 +373,16 @@ require_once '../layouts/header.php';
                   Name
                 </th>
                 <th class="p-4 text-left text-sm font-medium text-white">
-                  Email
+                  Description
                 </th>
                 <th class="p-4 text-left text-sm font-medium text-white">
-                  Role
+                  Price
                 </th>
                 <th class="p-4 text-left text-sm font-medium text-white">
-                  Status
+                  Stock
                 </th>
                 <th class="p-4 text-left text-sm font-medium text-white">
-                  Created At
+                  Image
                 </th>
                 <th class="p-4 text-left text-sm font-medium text-white">
                   Actions
@@ -387,7 +391,48 @@ require_once '../layouts/header.php';
             </thead>
 
             <tbody id="tbody" class="whitespace-nowrap">
+            <?php 
+            foreach($products as $product){
               
+              echo "
+              <tr>
+              <td class='p-4 text-sm text-black'>
+                $product[name]
+                  </td>
+                  <td class='p-4 text-sm text-black'>
+                     $product[description]
+                  </td>
+                  <td class='p-4 text-sm text-black'>
+                     $product[price]
+                  </td>
+                  <td class='p-4 text-sm text-black'>
+                     $product[stock]
+                  </td>
+                  <td class='p-4 text-sm text-black'>
+            <img src='/online-store-system/public/images/".htmlspecialchars($product['image_url'])."' alt='product_img'>
+                    
+                  </td>
+                  <td class='p-4'>
+                    <button class='mr-4' title='Edit'>
+                      <svg xmlns='http://www.w3.org/2000/svg' class='w-5 fill-blue-500 hover:fill-blue-700'
+                        viewBox='0 0 348.882 348.882'>
+                        <path
+                          d='m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z'
+                          data-original='#000000' />
+                        <path
+                          d='M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z'
+                          data-original='#000000' />
+                      </svg>
+                    </button>
+
+
+                 
+                  </td>          
+          
+              </tr>
+              ";}
+            
+            ?>
             
         
             </tbody>
@@ -396,18 +441,20 @@ require_once '../layouts/header.php';
       </section>
     </div>
 
-    <div id="modal" class="flex items-center justify-center absolute top-[100px] left-[600px]">
+  
+
+    <!-- <div id="modal" class="flex items-center justify-center absolute top-[100px] left-[600px]">
     <div class="mx-auto w-full max-w-[400px] bg-white">
-        <form class="py-3 px-6 text-sm" method="POST" action="">
-            <!-- Product Name and Price -->
+        <form class="py-3 px-6 text-sm" method="POST" action="/Online-Store-System/controllers/ProductsControllers.php" enctype="multipart/form-data">
             <div class="flex gap-2">
                 <div class="mb-4">
                     <label for="product-name" class="mb-2 block text-sm font-medium text-[#07074D]">
                         Product Name:
                     </label>
                     <input type="text" name="product-name" id="product-name" placeholder="Enter product name"
-                        class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]" required />
+                        class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]"  />
                 </div>
+                <h1><?= isset($error['product-name'])?$error['product-name']:'' ?></h1>
                 <div class="mb-4">
                     <label for="product-price" class="mb-2 block text-sm font-medium text-[#07074D]">
                         Product Price:
@@ -417,7 +464,6 @@ require_once '../layouts/header.php';
                 </div>
             </div>
 
-            <!-- Product Description -->
             <div class="mb-4">
                 <label for="product-description" class="mb-2 block text-sm font-medium text-[#07074D]">
                     Product Description:
@@ -426,7 +472,6 @@ require_once '../layouts/header.php';
                     class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]" rows="3" required></textarea>
             </div>
 
-            <!-- Product Stock -->
             <div class="mb-4">
                 <label for="product-stock" class="mb-2 block text-sm font-medium text-[#07074D]">
                     Product Stock:
@@ -435,7 +480,6 @@ require_once '../layouts/header.php';
                     class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]" min="0" step="1" required />
             </div>
 
-            <!-- Upload Product Image -->
             <div class="mb-5">
                 <label for="product-image" class="mb-2 block text-sm font-medium text-[#07074D]">
                     Upload Image:
@@ -443,16 +487,15 @@ require_once '../layouts/header.php';
                 <input type="file" name="product-image" id="product-image" class="text-sm" required />
             </div>
 
-            <!-- Submit Button -->
             <div>
-                <button type="submit"
+                <button type="submit" name="submit"
                     class="w-full rounded-md bg-[#6A64F1] py-2 px-6 text-sm font-semibold text-white outline-none hover:bg-[#5a54d1]">
                     Insert Product
                 </button>
             </div>
         </form>
     </div>
-</div>
+</div>  -->
 
 
     

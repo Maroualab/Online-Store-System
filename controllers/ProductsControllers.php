@@ -1,53 +1,38 @@
 <?php
-require_once '../config/connection.php';
+
+include $_SERVER['DOCUMENT_ROOT'].'/online-store-system/models/Product.php';
 
 
-class ProductManager
-{
-    public function displayAll()
-    {
-        $conn = Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM products");
-        $stmt->execute();
-        $products = $stmt->fetchAll();
-        $data = [];
-        foreach ($products as $product) {
-            $data[] = new Product($product['id'], $product['name'], $product['description'], $product['price'], $product['quantity']);
-        }
-        return $data;// [ Product, Product, Product]
-    }
 
-    public function delete($id)
-    {
-        $conn = Database::getConnection();
-        $stmt = $conn->prepare("DELETE FROM products WHERE id = :id");
-        // $stmt->bindParam(':id', $id);
-        $stmt->execute([
-            ':id' => $id
-        ]);
-    }    
 
-    public function getProduct($id)
-    {
-        $conn = Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
-        $stmt->execute([
-            ':id' => $id
-        ]);
-        $product = $stmt->fetch();
-        return new Product($product['id'], $product['name'], $product['description'], $product['price'], $product['quantity']);
-    }
+if(isset($_POST['submit'])){
+    
+    $name = $_POST['product-name'];
+    $price = $_POST['product-price'];
+    $description = $_POST['product-description'];
+    $stock = $_POST['product-stock'];
+    $image = $_FILES['product-image'];
+    
+   
+    // print_r($image);
 
-    public function update(Product $product)
-    {
-        $conn = Database::getConnection();
-        $stmt = $conn->prepare("UPDATE products SET name = :name, description = :description, price = :price, quantity = :quantity WHERE id = :id");
-        $stmt->execute([
-            ':name' => $product->getName(),
-            ':description' => $product->getDescription(),
-            ':price' => $product->getPrice(),
-            ':quantity' => $product->getQuantity(),
-            ':id' => $product->getId()
-        ]);
-    }
+    // foreach($_POST as $key => $value ){
+    //         if(!$value || isset($_POST['key'])){
+    //             $error[$key]="$key is required";
+    //             $old=['name'=>$name,'price'=>$price,'description'=>$description,'stock'=>$stock,'image'=>$image];
+
+    //             header("location:/online-store-system/views/pages/products.php");
+    //             exit;
+    //         }
+    //     }
+
+    
+    $target = '../public/images/'.$image['name'];
+    move_uploaded_file($image['tmp_name'],$target);
+
+    $product=new Product($name,$description,$price,$stock,$image['name']);
+    $product->insert();
+    
+        
 }
+
