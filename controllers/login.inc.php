@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Check if the email exists in the database
-    $sql = "SELECT * FROM users WHERE username = :name";
+    $sql = "SELECT * FROM users WHERE username = :name WHERE status = 'active';";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':name', $name);
     $stmt->execute();
