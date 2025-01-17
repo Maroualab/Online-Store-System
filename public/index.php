@@ -3,8 +3,8 @@ require_once '../views/layouts/header.php';
 ?>
 
 <div class="bg-gradient-to-r from-indigo-900 to-purple-900 font-[sans-serif]">
-  <div class="relative overflow-hidden">
-    <div class="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8">
+  <div class="relative overflow-hidden h-[89dvh]">
+    <div class="max-w-screen-xl  mx-auto py-16 px-4 sm:px-6 lg:py-48 lg:px-8">
       <div class="relative z-10 text-center lg:text-left">
         <h1 class="text-4xl tracking-tight leading-10 font-extrabold text-white sm:text-5xl sm:leading-none md:text-6xl lg:text-7xl">
           Welcome to
@@ -15,18 +15,6 @@ require_once '../views/layouts/header.php';
           Elevate your culinary experience with our exclusive premium services. Indulge in exquisite flavors and extraordinary moments.
         </p>
 
-        <div class="mt-12 flex max-sm:flex-col sm:justify-center lg:justify-start gap-4">
-          <div class="rounded-md shadow">
-          <a href="/online-store-system/views/pages/register.php"><button class="w-full flex items-center justify-center px-8 py-3 text-base tracking-wide rounded-md text-indigo-600 bg-white hover:text-indigo-500 hover:bg-indigo-100 transition duration-150 ease-in-out" id="signUp">
-              Sign Up
-            </button></a>
-          </div>
-          <div>
-            <a href="/online-store-system/views/pages/login.php"><button class="w-full flex items-center justify-center px-8 py-3 text-base tracking-wide rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition duration-150 ease-in-out" id="logIn">
-              Log In
-            </button></a>
-          </div>
-        </div>
       </div>
     </div>
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">

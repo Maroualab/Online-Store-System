@@ -37,14 +37,7 @@ class Product
         return $this->stock;
     }
 
-    public function setName($name)
-    {
-        if(!$name){
-            echo "Name is required";
-            return;
-        }
-        $this->name = $name;
-    }
+ 
 
     public function setDescription($description)
     {
@@ -69,11 +62,7 @@ class Product
         $this->image = $image;
     }
 
-    public function __destruct()
-    {
-        echo "Product object is destroyed\n";
-    }
-
+  
     public function rendreRow()
     {
         return "<tr>

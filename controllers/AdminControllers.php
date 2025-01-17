@@ -11,8 +11,5 @@ class AdminController {
         $this->pdo = $pdo;
     }
 
-    // public function showProducts() {
-    //     $userModel = new User($this->pdo);
-    //     // Logic to show products
-    // }
+  
 }

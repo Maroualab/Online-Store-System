@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Check if the email exists in the database
-    $sql = "SELECT * FROM users WHERE username = :name WHERE status = 'active';";
+    $sql = "SELECT * FROM users WHERE username = :name AND status  = 'active';";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':name', $name);
     $stmt->execute();
@@ -24,23 +24,24 @@ if (isset($_POST['submit'])) {
 
 
     if ($user) {
-        // Verify the password
-        if (password_verify($password, $user['password'])) {
-            // Password is correct, start the session
-            $_SESSION['user_id'] = $user['user_id']; // 
-            $_SESSION['user_name'] = $user['username'];
+        if ($user['role'] == "client") {
+            if (password_verify($password, $user['password'])) {
+                // $_SESSION['user_id'] = $user['user_id']; 
+                // $_SESSION['user_name'] = $user['username']; 
+                $_SESSION['user'] = ["id"=>$user['user_id'],"name"=>$user['username'],"email"=>$user['email'],"role"=>$user['role']];
 
-            // Redirect to the product view page
-            
-            header("Location:../views/pages/productView.php");
-            exit();
-        } else {
-            echo "Incorrect password.";
+                header("Location: ../views/pages/productView.php");
+                exit();
+            } else {
+                echo "Incorrect password.";
+                exit();
+            }
+        } elseif ($user['role'] == "admin") {
+            header("Location: ../views/pages/dashboard.php");
             exit();
         }
     } else {
-        echo "No user found with that name.";
+        echo "No user found with that username or user is not active.";
         exit();
     }
 }
-

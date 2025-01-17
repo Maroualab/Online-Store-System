@@ -9,7 +9,7 @@ class ProductManager{
 
         global $pdo;
 
-        $sql="SELECT * FROM products";
+        $sql="SELECT * FROM products WHERE deleted_at IS NULL";
         $stmt=$pdo->prepare($sql);
         $stmt->execute();
 
@@ -32,10 +32,9 @@ class ProductManager{
     }
 
     public static function updateProduct($name,$description,$price,$stock,$image,$id){
-
+        
         global $pdo;
-
-       
+           
         $sql="UPDATE products SET name=:name , description=:description, price=:price , stock=:stock , image_url=:image_url WHERE product_id=:id ;";
         $stmt=$pdo->prepare($sql);
         $stmt->execute([
@@ -46,7 +45,18 @@ class ProductManager{
             "image_url"=>$image,
             "id"=>$id
         ]);
+        
+        
+    }
+    public static function softDeleteProduct($id){
 
+    global $pdo;
+
+    $sql="UPDATE products SET deleted_at=now() WHERE product_id=:id";
+    $stmt=$pdo->prepare($sql);
+    $stmt->execute([
+        "id"=>$id
+    ]);
 
 
     }

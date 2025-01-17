@@ -1,15 +1,12 @@
 
 <?php
 require_once '../layouts/header.php';
+
 ?>
 
 <div class="flex flex-col justify-center font-[sans-serif] sm:h-screen p-4">
   <div class="max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8">
-    <div class="text-center mb-12">
-      <a href="javascript:void(0)"><img
-        src="https://readymadeui.com/readymadeui.svg" alt="logo" class='w-40 inline-block' />
-      </a>
-    </div>
+    
 
 
     <form action="../../controllers/register.inc.php" method="POST">

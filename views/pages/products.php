@@ -5,16 +5,15 @@ include '../../controllers/showProduct.php';
 include_once '../../controllers/ProductsControllers.php';
 
 
-if(isset($_GET['id'])){
-      $id=$_GET['id'];
-
-
-$_SESSION["editedProducts"]= ProductManager::selectProduct($id);   
 global $products;
-$editedProducts=isset($_SESSION["editedProducts"])?$_SESSION["editedProducts"]:[]; }
-$_SESSION["editedProducts"]=null;
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
 
 
+  $_SESSION["editedProducts"] = ProductManager::selectProduct($id);
+  $editedProducts = isset($_SESSION["editedProducts"]) ? $_SESSION["editedProducts"] : [];
+}
+$_SESSION["editedProducts"] = null;
 
 ?>
 
@@ -91,7 +90,7 @@ $_SESSION["editedProducts"]=null;
                     Account</a>
                   <hr class="my-2 -mx-2" />
 
-                  <a href="javascript:void(0)"
+                  <a href="dashboard.php"
                     class="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4 mr-3 fill-current"
                       viewBox="0 0 24 24">
@@ -103,7 +102,7 @@ $_SESSION["editedProducts"]=null;
                         data-original="#000000"></path>
                     </svg>
                     Dashboard</a>
-                  <a href="javascript:void(0)"
+                  <a href="products.php"
                     class="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 fill-current" viewBox="0 0 24 24">
                       <path
@@ -112,7 +111,7 @@ $_SESSION["editedProducts"]=null;
                       <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
                       <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
                     </svg>
-                    Posts</a>
+                    Products</a>
                   <a href="javascript:void(0)"
                     class="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 fill-current" viewBox="0 0 510 510">
@@ -155,7 +154,7 @@ $_SESSION["editedProducts"]=null;
           class="bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max max-lg:w-0 max-lg:invisible transition-all duration-500">
           <ul class="space-y-2">
             <li>
-              <a href="javascript:void(0)"
+              <a href="dashboard.php"
                 class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                   viewBox="0 0 24 24">
@@ -187,7 +186,7 @@ $_SESSION["editedProducts"]=null;
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)"
+                <a href="products.php"
                   class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                     viewBox="0 0 24 24">
@@ -197,7 +196,7 @@ $_SESSION["editedProducts"]=null;
                     <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
                     <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
                   </svg>
-                  <span>Posts</span>
+                  <span>Products</span>
                 </a>
               </li>
               <li>
@@ -423,12 +422,11 @@ $_SESSION["editedProducts"]=null;
                      $product[stock]
                   </td>
                   <td class='p-4 text-sm text-black'>
-            <img src='/online-store-system/public/images/" . htmlspecialchars($product['image_url']) . "' alt='product_img'>
+            <img width=50 height=50 src='/online-store-system/public/images/" . htmlspecialchars($product['image_url']) . "' alt='product_img'>
                     
                   </td>
                   <td class='p-4'>
                     <a href='products.php?id=$product[product_id]'> 
-
                     <button id='editForm' class='mr-4' title='Edit'>
                       <svg xmlns='http://www.w3.org/2000/svg' class='w-5 fill-blue-500 hover:fill-blue-700'
                         viewBox='0 0 348.882 348.882'>
@@ -441,6 +439,18 @@ $_SESSION["editedProducts"]=null;
                       </svg>
                     </button>
                     </a>
+
+                      <a href='products.php?deletedId=$product[product_id]'>
+                      <button class='mr-4' title='Delete'>
+                      <svg xmlns='http://www.w3.org/2000/svg' class='w-5 fill-red-500 hover:fill-red-700'
+                        viewBox='0 0 24 24'>
+                        <path
+                          d='M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z'
+                          data-original='#000000' />
+                        <path d='M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z'
+                          data-original='#000000' />
+                      </svg>
+                    </button>
 
 
                  
@@ -463,9 +473,8 @@ $_SESSION["editedProducts"]=null;
 
     <div id="modal" class="items-center justify-center absolute top-[100px] left-[600px] hidden ">
       <div class="mx-auto w-full max-w-[400px] bg-white">
-      
-        <form class="py-3 px-6 text-sm" method="POST" action=""
-          enctype="multipart/form-data" id="formInput">
+
+        <form class="py-3 px-6 text-sm" method="POST" action="" enctype="multipart/form-data" id="formInput">
           <div class="flex gap-2">
             <!-- Close Button -->
             <button id="closeModal"
@@ -480,7 +489,8 @@ $_SESSION["editedProducts"]=null;
               <label for="product-name" class="mb-2 block text-sm font-medium text-[#07074D]">
                 Product Name:
               </label>
-              <input type="text" name="product-name" id="product-name" placeholder="Enter product name" value="<?=isset($editedProducts['name'])?$editedProducts['name']:''?>"
+              <input type="text" name="product-name" id="product-name" placeholder="Enter product name"
+                value="<?= isset($editedProducts['name']) ? $editedProducts['name'] : '' ?>"
                 class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]" />
             </div>
 
@@ -490,7 +500,8 @@ $_SESSION["editedProducts"]=null;
               <label for="product-price" class="mb-2 block text-sm font-medium text-[#07074D]">
                 Product Price:
               </label>
-              <input type="number" name="product-price" id="product-price" placeholder="Enter price" value="<?=isset($editedProducts['price'])?$editedProducts['price']:''?>"
+              <input type="number" name="product-price" id="product-price" placeholder="Enter price"
+                value="<?= isset($editedProducts['price']) ? $editedProducts['price'] : '' ?>"
                 class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]"
                 min="0" step="0.01" required />
             </div>
@@ -503,7 +514,7 @@ $_SESSION["editedProducts"]=null;
             </label>
             <textarea name="product-description" id="product-description" placeholder="Enter description"
               class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]"
-              rows="3" required><?=isset($editedProducts['description'])?$editedProducts['description']:''?></textarea>
+              rows="3" required><?= isset($editedProducts['description']) ? $editedProducts['description'] : '' ?></textarea>
           </div>
 
           <div class="mb-4">
@@ -512,16 +523,17 @@ $_SESSION["editedProducts"]=null;
             </label>
             <input type="number" name="product-stock" id="product-stock" placeholder="Enter stock"
               class="w-full rounded-md border border-[#e0e0e0] py-2 px-4 text-[#6B7280] outline-none focus:border-[#6A64F1]"
-              min="0" step="1" required value="<?=isset($editedProducts['stock'])?$editedProducts['stock']:''?>" />
+              min="0" step="1" required value="<?= isset($editedProducts['stock']) ? $editedProducts['stock'] : '' ?>" />
           </div>
 
           <div class="mb-5">
             <label for="product-image" class="mb-2 block text-sm font-medium text-[#07074D]">
               Upload Image:
             </label>
-            <input type="file" name="product-image" id="product-image" class="text-sm" required value="<?=isset($editedProducts['image_url'])?$editedProducts['image_url']:''?>"/>
+            <input type="file" name="product-image" id="product-image" class="text-sm" required
+              value="<?= isset($editedProducts['image_url']) ? $editedProducts['image_url'] : '' ?>" />
           </div>
-       
+
           <div>
             <button type="submit" name="submit"
               class="w-full rounded-md bg-[#6A64F1] py-2 px-6 text-sm font-semibold text-white outline-none hover:bg-[#5a54d1]">
@@ -543,11 +555,11 @@ $_SESSION["editedProducts"]=null;
 <script>
 
   let modal = document.getElementById("modal");
-  let form=document.getElementById("formInput");  
+  let form = document.getElementById("formInput");
 
 
   document.getElementById("addProduct").addEventListener('click', () => {
-  let form=document.getElementById("formInput");  
+    let form = document.getElementById("formInput");
     // form.reset();
     modal.classList.remove("hidden");
     modal.classList.add("flex");
@@ -558,15 +570,15 @@ $_SESSION["editedProducts"]=null;
     modal.classList.add("hidden");
     form.reset();
     window.location.href = "/online-store-system/views/pages/products.php";
-});
+  });
 
- 
-        let queryString = window.location.search;
-        let urlParams = new URLSearchParams(queryString);
-        let editclubeid = urlParams.get('id');
-    if(editclubeid){
-        document.getElementById("addProduct").click();
-    };
+
+  let queryString = window.location.search;
+  let urlParams = new URLSearchParams(queryString);
+  let editclubeid = urlParams.get('id');
+  if (editclubeid) {
+    document.getElementById("addProduct").click();
+  };
 
 
 
